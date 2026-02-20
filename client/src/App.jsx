@@ -35,7 +35,7 @@ function App() {
     setError(null);
     try {
       // Fetch a nuestra API local (CORS debe estar habilitado en backend)
-      const respuesta = await fetch('http://localhost:3001/api/sensores');
+      const respuesta = await fetch(`${process.env.URL_API || 'http://localhost:3001'}/api/sensores`);
       if (!respuesta.ok) {
         throw new Error(`Error HTTP: ${respuesta.status}`);
       }
@@ -68,7 +68,7 @@ function App() {
       alert("Por favor completa todos los campos");
       return;
     } try {
-      const respuesta = await fetch('http://localhost:3001/api/sensores', {
+      const respuesta = await fetch(`${process.env.URL_API || 'http://localhost:3001'}/api/sensores`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json' // Indicamos que enviamos JSON
@@ -92,7 +92,7 @@ function App() {
       return; // Si el usuario cancela, no hacemos nada
     }
     try {
-      await fetch(`http://localhost:3001/api/sensores/${id}`, {
+      await fetch(`${process.env.URL_API || 'http://localhost:3001'}/api/sensores/${id}`, {
         method: 'DELETE'
       });
       // Actualizamos la lista tras eliminar
